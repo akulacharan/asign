@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-10 offset-md-1 mt-5">
+  <div class="jumbotron">
+      <h1 class="display-4">sign-in </h1>
+      <p class="lead font-italic">Enter credentials</p>
+      <div>
+          <form action="" method="post" autocomplete="off" class="form-horizontal form_middle" enctype='multipart/form-data' >
+              {% csrf_token %}
+
+              <div class="form-group col-md-6">
+                   <label for="phone_number">Mobile</label>
+                    <input type="number" class="form-control" name="phone_number" id="phone_number" required title= "Your number" >
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your number with anyone else.</small>
+              </div>
+
+              <div class="form-group col-md-6" >
+                    <label for="password">Password</label>
+                    <input type="password" name="password" pattern=".{4,}"   required title="8 characters minimum" class="form-control" id="password">
+              </div>
+              <div class="form-group form-check">
+                  <label class="checkbox">
+                     <input type="checkbox" value="remember-me" id="remember_me"> Remember me?
+                  </label>
+
+              </div>
+
+              <button type="submit" class="btn btn-primary">Sign in</button>
+
+          </form>
+      </div>
+  </div>
+</div>
+
+<!---script for remembering password-->
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+            $(function() {
+
+                if (localStorage.chkbx && localStorage.chkbx != '') {
+                    $('#remember_me').attr('checked', 'checked');
+                    $('#phone_number').val(localStorage.usrname);
+                    $('#password').val(localStorage.pass);
+                } else {
+                    $('#remember_me').removeAttr('checked');
+                    $('#phone_number').val('');
+                    $('#password').val('');
+                }
+
+                $('#remember_me').click(function() {
+
+                    if ($('#remember_me').is(':checked')) {
+                        // save username and password
+                        localStorage.usrname = $('#phone_number').val();
+                        localStorage.pass = $('#password').val();
+                        localStorage.chkbx = $('#remember_me').val();
+                    } else {
+                        localStorage.phone_number = '';
+                        localStorage.password = '';
+                        localStorage.chkbx = '';
+                    }
+                });
+            });
+
+</script>
+
+{% endblock content %}

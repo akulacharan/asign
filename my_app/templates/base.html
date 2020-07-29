@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DEZZEX</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body class="bg">
+    <nav class="navbar navbar-dark bg-dark">
+           <a class="navbar-brand" href="/" style="float:left;">
+               <h3><b><i>DEZZEX</i></b></h3>
+           </a>
+         {% if user.is_authenticated %}
+
+        <a href="profile/{{user.username}}" style="color:white;"><h2>Hello,{{user.username}}</h2></a>
+        <a href="{% url 'logout' %}" class="btn btn-warning" >Logout</a>
+        {% else %}
+        <a href="{% url 'register' %}"  class="btn btn-warning ">Register</a>
+        <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
+        {% endif %}
+    </nav>
+    <div class="container">
+        {% if user.is_authenticated %}
+
+        {% for list in customer %}
+        <h2>Mobile : {{list.mobile}}</h2>
+        <h2>Name : {{list.username}}</h2>
+        <h2>Passport number:{{list.passport_num}}</h2>
+        <h2>Date of birth : {{list.date_of_birth}}</h2>
+        <h2>Email: {{list.email}}</h2>
+        <h2>picture : <img style="height:200px;" src="{{list.image.url}}"> </h2>
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% block content %}
+        {% endblock content %}
+
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+<!-- style for background image -->
+<style>
+    .bg {
+          /* The image used */
+          background-image: url("https://hdwallpaperim.com/wp-content/uploads/2017/08/25/463034-men-simple_background-digital_art-graffiti-clouds-minimalism-white_background.jpg");
+
+          /* Full height */
+          height: 80%;
+
+          /* Center and scale the image nicely */
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+</style>
